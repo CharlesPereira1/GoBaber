@@ -2,7 +2,7 @@
   "name": "GoBarber",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "lucassilva97 <37308345+lucassilva97@users.noreply.github.com>",
+  "author": "Charles Pereira",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
@@ -13,6 +13,7 @@
     "@sentry/node": "5.7.1",
     "bcryptjs": "^2.4.3",
     "bee-queue": "^1.2.2",
+    "cors": "^2.8.5",
     "date-fns": "^2.0.0-beta.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
