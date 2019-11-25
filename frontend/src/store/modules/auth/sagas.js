@@ -1,4 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 // import '../../../config/ReactotronConfig';
 import history from '~/services/history';
@@ -26,7 +27,7 @@ export function* signIn({ payload }) {
 
     // condiçao que se o usuário não for prestador de serviço não deixar logar
     if (!user.provider) {
-      console.tron.error('Usuário não é prestador');
+      toast.error('Usuário não é prestador');
       return;
     }
     // se for prestador será signInSuccess
@@ -34,6 +35,7 @@ export function* signIn({ payload }) {
 
     history.push('/dashboard');
   } catch (err) {
+    toast.error('Falha na autenticação, verifique seus dados');
     yield put(signFailure());
   }
 }
