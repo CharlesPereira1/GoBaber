@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
@@ -11,19 +10,23 @@ export default function RouteWrapper({
   isPrivate,
   ...rest
 }) {
+  // armazena se o usuário está logado ou não, padrão é false
   const signed = false;
 
+  // se o usuario não estiver logado e a propriedade is private for true ele continua na pagina de login
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
   }
 
+  // se estiver logado e a rota não for privada o usuário é redirecionado para o dashboard
   if (signed && !isPrivate) {
     return <Redirect to="/dashboard" />;
   }
 
+  // se o usuario estiver autenticado na aplicaçao uso o layout default, senão uso o AuthLayout
   const Layout = signed ? DefaultLayout : AuthLayout;
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
+  //
   return (
     <Route
       {...rest}
@@ -36,8 +39,8 @@ export default function RouteWrapper({
   );
 }
 
-// eslint-disable-next-line react/no-typos
-RouteWrapper.PropTypes = {
+// propType começa com letra minuscula quando chamado na variavel principal
+RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
