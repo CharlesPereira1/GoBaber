@@ -7,7 +7,9 @@ import produce from 'immer';
 const INITIAL_STATE = {
   profile: null,
 };
-
+/**
+ * um reducer pode ouvir actions(@auth/SIGN_IN_SUCCESS) de outros modulos
+ */
 export default function user(state = INITIAL_STATE, action) {
   switch (action.type) {
     case '@auth/SIGN_IN_SUCCESS':
