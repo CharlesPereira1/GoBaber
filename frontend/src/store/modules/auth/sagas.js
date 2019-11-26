@@ -30,6 +30,10 @@ export function* signIn({ payload }) {
       toast.error('Usuário não é prestador');
       return;
     }
+
+    // salva inforo de token que será utilizado em todas as requisiçoes
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
     // se for prestador será signInSuccess
     yield put(signInSuccess(token, user));
 
@@ -59,8 +63,19 @@ export function* signUp({ payload }) {
   }
 }
 
+export function setToken({ payload }) {
+  if (!payload) return;
+
+  const { token } = payload.auth;
+
+  if (token) {
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+  }
+}
+
 // takeLatest sempre que ouvir a informação SIGN_IN_REQUEST executar função signIn
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
 ]);
