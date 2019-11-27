@@ -5,6 +5,14 @@ export const Container = styled.div`
   padding: 0 30px;
 `;
 
+/**
+ * justify-content: space-between - usado para deixar logo de um lado
+ * e perfil do outro da largura maxima da width
+ * ----------------------------------------------
+ * align-items: center - centraliza logo com texto e perfil com texto
+ * ----------------------------------------------
+ * sem o display: block não se consegue dar um margin-top no texto
+ */
 export const Content = styled.div`
   height: 64px;
   max-width: 900px;
