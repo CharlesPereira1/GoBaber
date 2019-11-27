@@ -31,11 +31,11 @@ export function* signIn({ payload }) {
       return;
     }
 
-    // salva inforo de token que será utilizado em todas as requisiçoes
-    api.defaults.headers.Authorization = `Bearer ${token}`;
-
     // se for prestador será signInSuccess
     yield put(signInSuccess(token, user));
+
+    // salva inforo de token que será utilizado em todas as requisiçoes
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
     history.push('/dashboard');
   } catch (err) {
