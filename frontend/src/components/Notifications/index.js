@@ -22,11 +22,26 @@ export default function Notifications() {
   const [visible, setVisible] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
+  /**
+   * useMemo - recalcula valor, utilizado para retornar se tem notificaçao nao lida no sino de notification
+   * !! - utilizado para retornar se encontrar notification para true e false se não encontrar
+   * para mudar o estado do icone do sino ai ficará laranja a notification se tiver msg ñ lida
+   */
   const hasUnread = useMemo(
     () => !!notifications.find(notification => notification.read === false),
     [notifications]
   );
 
+  /**
+   * useEffect - dispara ação assim que o componente é montado
+   * parseISO - converte uma data em formato de texto para um formato date no JS
+   * formatDistance - cria um formato de distancia, ex.: esta data foi a 5min atras
+   * pt - formato em pt-br
+   * ------------------------
+   * const data - é uma variavel que percorre cada uma das notifications com auxilio do map
+   * e retorna um objeto notification com os dados dentro do objeto
+   * addSuffix - se for true o sistema vai informar que tal processo foi atualizado há 3dias atras por exemplo
+   */
   useEffect(() => {
     async function loadNotifications() {
       const response = await api.get('notifications');
@@ -56,6 +71,10 @@ export default function Notifications() {
     setVisible(!visible);
   }
 
+  /**
+   * Marca notification como lida, atualiza o campo read do mongoDB
+   * @param {busca id principal da tabela do postgree} id
+   */
   async function handleMaskAsRead(id) {
     await api.put(`notifications/${id}`);
 
