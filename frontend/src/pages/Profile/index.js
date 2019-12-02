@@ -15,6 +15,7 @@ export default function Profile() {
 
   function handleSubmit(data) {
     dispatch(updateProfileRequest(data));
+    console.tron.log(data);
   }
 
   /**

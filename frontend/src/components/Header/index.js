@@ -18,9 +18,8 @@ export default function Header() {
         </nav>
 
         <aside>
+          <Notifications />
           <Profile>
-            <Notifications />
-
             <div>
               <strong>Diego Fernandes</strong>
               <Link to="/profile">Meu perfil</Link>
