@@ -73,9 +73,14 @@ export function setToken({ payload }) {
   }
 }
 
+export function signOut() {
+  history.push('/');
+}
+
 // takeLatest sempre que ouvir a informação SIGN_IN_REQUEST executar função signIn
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
+  takeLatest('@auth/SIGN_OUT', signOut),
 ]);
